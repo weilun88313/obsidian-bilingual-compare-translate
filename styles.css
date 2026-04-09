@@ -1,0 +1,337 @@
+.bct-view {
+  padding: var(--size-4-3);
+}
+
+.bct-inline-host {
+  min-height: 100%;
+}
+
+.bct-inline-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 10px minmax(280px, var(--bct-inline-pane-width, 36%));
+  gap: 0;
+  height: 100%;
+  min-height: 0;
+  --bct-pane-gutter: clamp(22px, 3vw, 36px);
+  --bct-pane-bottom-space: calc(var(--size-4-8) + env(safe-area-inset-bottom, 0px));
+}
+
+.bct-inline-source {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-inline: var(--bct-pane-gutter);
+  padding-bottom: var(--bct-pane-bottom-space);
+}
+
+.bct-inline-divider {
+  position: relative;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+}
+
+.bct-inline-divider::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--background-modifier-border);
+  content: "";
+}
+
+.bct-inline-divider:hover::before,
+.bct-inline-divider.is-dragging::before {
+  background: var(--interactive-accent);
+}
+
+.bct-inline-translation-shell {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  background: var(--background-primary);
+}
+
+.bct-inline-pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: var(--size-4-2) var(--size-4-3);
+  border-bottom: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+}
+
+.bct-inline-pane-meta {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.bct-inline-pane-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.bct-language-select {
+  min-width: 0;
+  max-width: 7.5rem;
+  height: 28px;
+  padding: 0 0.4rem;
+  font-size: var(--font-ui-smaller);
+}
+
+.bct-inline-pane-title {
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-semibold);
+}
+
+.bct-inline-pane-status {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.35;
+}
+
+.bct-inline-pane-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.bct-icon-button {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--clickable-icon-radius);
+  background: transparent;
+  color: var(--text-muted);
+  box-shadow: none;
+}
+
+.bct-icon-button:hover,
+.bct-icon-button:focus-visible {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.bct-icon-button.is-loading {
+  color: var(--text-normal);
+}
+
+.bct-icon-button.is-loading svg {
+  animation: bct-spin 0.9s linear infinite;
+}
+
+.bct-inline-translation-body {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: var(--size-4-5) var(--bct-pane-gutter) var(--bct-pane-bottom-space);
+  scroll-padding-bottom: var(--bct-pane-bottom-space);
+}
+
+.bct-metadata-mirror {
+  margin-bottom: var(--size-4-5);
+  pointer-events: none;
+  user-select: none;
+}
+
+.bct-metadata-mirror .clickable-icon,
+.bct-metadata-mirror a,
+.bct-metadata-mirror button,
+.bct-metadata-mirror input,
+.bct-metadata-mirror select,
+.bct-metadata-mirror textarea {
+  pointer-events: none;
+}
+
+.bct-preview__content {
+  min-width: 0;
+}
+
+.bct-translation-block {
+  min-width: 0;
+  padding: 0.125rem 0.5rem;
+  margin-inline: -0.5rem;
+  border-radius: var(--radius-s);
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.bct-translation-block + .bct-translation-block {
+  margin-top: var(--size-4-2);
+}
+
+.bct-translation-block.is-active {
+  background: color-mix(in srgb, var(--interactive-accent) 12%, transparent);
+  box-shadow: inset 2px 0 0 var(--interactive-accent);
+}
+
+.bct-preview__content > :first-child {
+  margin-top: 0;
+}
+
+.bct-preview__content > :last-child {
+  margin-bottom: 0;
+}
+
+.bct-preview__content::after {
+  display: block;
+  height: var(--size-4-6);
+  content: "";
+}
+
+.bct-preview,
+.bct-preview__content {
+  min-width: 0;
+}
+
+.bct-preview,
+.bct-preview__content table,
+.bct-preview__content pre {
+  max-width: 100%;
+}
+
+.bct-preview__content table {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  overflow-x: auto;
+}
+
+.bct-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.bct-toolbar__title {
+  font-size: var(--font-ui-large);
+  font-weight: var(--font-semibold);
+}
+
+.bct-toolbar__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bct-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bct-status {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+
+.bct-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bct-preview {
+  padding: var(--size-4-4);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-primary);
+  overflow: auto;
+}
+
+.bct-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.bct-row--header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.bct-col {
+  min-width: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-primary);
+}
+
+.bct-col--header {
+  background: var(--background-primary-alt);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+}
+
+.bct-row--passthrough .bct-col--translated {
+  opacity: 0.84;
+}
+
+@media (max-width: 900px) {
+  .bct-inline-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .bct-inline-divider {
+    display: none;
+  }
+
+  .bct-inline-translation-shell {
+    border-top: 1px solid var(--background-modifier-border);
+    max-height: 42vh;
+  }
+
+  .bct-inline-pane-header {
+    flex-wrap: wrap;
+  }
+
+  .bct-inline-pane-controls {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .bct-language-select {
+    flex: 1 1 0;
+    max-width: none;
+  }
+
+  .bct-inline-source,
+  .bct-inline-translation-body {
+    padding-inline: var(--size-4-4);
+  }
+
+  .bct-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes bct-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

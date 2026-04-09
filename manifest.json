@@ -1,0 +1,9 @@
+{
+  "id": "bilingual-compare-translate",
+  "name": "Bilingual Compare Translate",
+  "version": "0.1.0",
+  "minAppVersion": "1.8.0",
+  "description": "Open a side-by-side bilingual translation view for the current Obsidian note.",
+  "author": "weilun",
+  "isDesktopOnly": false
+}
