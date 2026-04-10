@@ -115,9 +115,9 @@ export default class BilingualCompareTranslatePlugin extends Plugin {
     this.addSettingTab(new BilingualTranslateSettingTab(this.app, this));
   }
 
-  async onunload(): Promise<void> {
+  onunload(): void {
     const panes = Array.from(this.inlinePanes.values());
-    await Promise.all(panes.map((pane) => pane.detach()));
+    panes.forEach((pane) => pane.detach());
     this.inlinePanes.clear();
   }
 
@@ -154,7 +154,7 @@ export default class BilingualCompareTranslatePlugin extends Plugin {
     }
 
     if (this.inlinePanes.has(view.leaf)) {
-      await this.closeInlinePane(view.leaf);
+      this.closeInlinePane(view.leaf);
       return;
     }
 
@@ -172,7 +172,10 @@ export default class BilingualCompareTranslatePlugin extends Plugin {
   }
 
   async openInlinePaneForFile(file: TFile): Promise<void> {
-    const leaf = this.app.workspace.activeLeaf ?? this.app.workspace.getMostRecentLeaf();
+    const leaf =
+      this.getActiveMarkdownView()?.leaf ??
+      this.app.workspace.getMostRecentLeaf() ??
+      this.app.workspace.getLeaf(false);
     if (!leaf) {
       new Notice("Could not find a leaf to open the selected file.");
       return;
@@ -188,14 +191,14 @@ export default class BilingualCompareTranslatePlugin extends Plugin {
     await this.ensureInlinePane(view);
   }
 
-  async closeInlinePane(leaf: WorkspaceLeaf): Promise<void> {
+  closeInlinePane(leaf: WorkspaceLeaf): void {
     const pane = this.inlinePanes.get(leaf);
     if (!pane) {
       return;
     }
 
     this.inlinePanes.delete(leaf);
-    await pane.detach();
+    pane.detach();
   }
 
   getLiveMarkdownForFile(filePath: string): string | null {

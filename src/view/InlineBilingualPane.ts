@@ -55,7 +55,7 @@ export class InlineBilingualPane extends Component {
     await this.refresh();
   }
 
-  async detach(): Promise<void> {
+  detach(): void {
     this.isDetaching = true;
 
     if (this.refreshTimer) {
@@ -138,7 +138,7 @@ export class InlineBilingualPane extends Component {
     }
 
     if (shouldClosePaneForOpenedFile(this.trackedFilePath, file.path)) {
-      await this.plugin.closeInlinePane(this.view.leaf);
+      this.plugin.closeInlinePane(this.view.leaf);
       return;
     }
 
@@ -316,12 +316,12 @@ export class InlineBilingualPane extends Component {
         this.applyPaneWidth(wrapperEl);
       };
 
-      const handleUp = async () => {
+      const handleUp = () => {
         dividerEl.removeClass("is-dragging");
         window.removeEventListener("pointermove", handleMove);
         window.removeEventListener("pointerup", handleUp);
         this.stopDragging = null;
-        await this.plugin.saveSettings();
+        void this.plugin.saveSettings();
       };
 
       window.addEventListener("pointermove", handleMove);

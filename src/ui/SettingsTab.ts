@@ -39,9 +39,9 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
       .addDropdown((dropdown) =>
         dropdown
           .addOption("openai", "OpenAI-compatible")
-          .addOption("gemini", "Google Gemini")
-          .addOption("anthropic", "Anthropic Messages (native)")
-          .addOption("mymemory", "MyMemory (free public API)")
+          .addOption("gemini", "Gemini")
+          .addOption("anthropic", "Anthropic messages")
+          .addOption("mymemory", "MyMemory")
           .setValue(this.plugin.settings.apiProvider)
           .onChange(async (value) => {
             const provider = value as ApiProvider;
@@ -76,8 +76,8 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
 
     if (this.plugin.settings.apiProvider !== "mymemory") {
       new Setting(containerEl)
-        .setName("API key or SecretStorage name")
-        .setDesc("You can paste a raw API key here, or enter a SecretStorage name.")
+        .setName("API key or secret name")
+        .setDesc("Paste a raw API key here, or enter a stored secret name.")
         .addComponent((componentEl) =>
           new SecretComponent(this.app, componentEl)
             .setValue(this.plugin.settings.apiKeySecretName)
@@ -90,7 +90,7 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
 
     if (this.plugin.settings.apiProvider !== "mymemory") {
       new Setting(containerEl)
-        .setName("Model")
+        .setName("Model name")
         .setDesc("Model name or deployment ID.")
         .addText((text) =>
           text
@@ -118,8 +118,8 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
         );
 
       new Setting(containerEl)
-        .setName("Auth header name")
-        .setDesc("For official Anthropic this is x-api-key. Your proxy may use another name.")
+        .setName("Authentication header name")
+        .setDesc("For official Anthropic, this is x-api-key. Your proxy may use another name.")
         .addText((text) =>
           text
             .setPlaceholder("x-api-key")
@@ -131,8 +131,8 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
         );
 
       new Setting(containerEl)
-        .setName("Max tokens")
-        .setDesc("Maximum output tokens for the Anthropic Messages request.")
+        .setName("Maximum tokens")
+        .setDesc("Maximum output tokens for the Anthropic messages request.")
         .addText((text) =>
           text
             .setPlaceholder("1024")
@@ -187,7 +187,7 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
     if (this.plugin.settings.apiProvider === "mymemory") {
       new Setting(containerEl)
         .setName("Contact email")
-        .setDesc("Optional. MyMemory docs say a valid email increases the daily quota.")
+        .setDesc("Optional. MyMemory says a valid email increases the daily quota.")
         .addText((text) =>
           text
             .setPlaceholder("you@example.com")
