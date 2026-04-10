@@ -38,10 +38,10 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
       .setDesc("Choose the provider used for the live translated preview.")
       .addDropdown((dropdown) =>
         dropdown
-          .addOption("openai", "OpenAI-compatible")
+          .addOption("openai", "Compatible API")
           .addOption("gemini", "Gemini")
           .addOption("anthropic", "Anthropic messages")
-          .addOption("mymemory", "MyMemory")
+          .addOption("mymemory", "Free public service")
           .setValue(this.plugin.settings.apiProvider)
           .onChange(async (value) => {
             const provider = value as ApiProvider;
@@ -118,11 +118,11 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
         );
 
       new Setting(containerEl)
-        .setName("Authentication header name")
-        .setDesc("For official Anthropic, this is x-api-key. Your proxy may use another name.")
+        .setName("Authentication header")
+        .setDesc("Header used for authentication.")
         .addText((text) =>
           text
-            .setPlaceholder("x-api-key")
+            .setPlaceholder("API key header")
             .setValue(this.plugin.settings.anthropicAuthHeaderName)
             .onChange(async (value) => {
               this.plugin.settings.anthropicAuthHeaderName = value.trim() || "x-api-key";
@@ -132,7 +132,7 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
 
       new Setting(containerEl)
         .setName("Maximum tokens")
-        .setDesc("Maximum output tokens for the Anthropic messages request.")
+        .setDesc("Maximum output tokens per request.")
         .addText((text) =>
           text
             .setPlaceholder("1024")
@@ -187,10 +187,10 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
     if (this.plugin.settings.apiProvider === "mymemory") {
       new Setting(containerEl)
         .setName("Contact email")
-        .setDesc("Optional. MyMemory says a valid email increases the daily quota.")
+        .setDesc("Optional email address for higher quota.")
         .addText((text) =>
           text
-            .setPlaceholder("you@example.com")
+            .setPlaceholder("Email address")
             .setValue(this.plugin.settings.mymemoryContactEmail)
             .onChange(async (value) => {
               this.plugin.settings.mymemoryContactEmail = value.trim();
