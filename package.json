@@ -1,6 +1,6 @@
 {
   "name": "obsidian-bilingual-compare-translate",
-  "version": "0.1.2",
+  "version": "0.1.1",
   "description": "Live side-by-side bilingual translation with block-level alignment.",
   "main": "main.js",
   "scripts": {
